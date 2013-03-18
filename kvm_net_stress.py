@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# kvm_net_stress.py - Run a network stress test on a KVM guest
+# Copyright (C) 2013 Marwan Alsabbagh
+# license: BSD, see LICENSE for more details.
 
 import time, datetime, tempfile, argparse, logging.config, urlparse, itertools, subprocess, sys
 from path import path as Path  # pip install path.py
