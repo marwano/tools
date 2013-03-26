@@ -6,6 +6,7 @@
 import time, datetime, tempfile, argparse, logging.config, urlparse, itertools, subprocess, sys
 from path import path as Path  # pip install path.py
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+SIZES = [(1024 ** k, v) for k, v in enumerate(['B', 'KB', 'MB', 'GB', 'TB', 'PB'])]
 
 
 def get_temp(name):
@@ -58,12 +59,9 @@ example usage:
 """
 
 
-#taken from http://stackoverflow.com/a/1094933/1699750
-def sizeof_fmt(num):
-    for x in ['bytes', 'KB', 'MB', 'GB', 'TB']:
-        if num < 1024.0:
-            return "%3.1f %s" % (num, x)
-        num /= 1024.0
+def human_size(val):
+    size, label = [(size, label) for size, label in SIZES if val < size * 1024][0]
+    return "%3.1f %s" % (val / float(size), label)
 
 
 def kvm_state(guest):
